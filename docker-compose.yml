@@ -1,0 +1,9 @@
+version: '1'
+services:
+  ziggybot:
+    build: .
+    environment:
+      CLIENT_ID: ${CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+      TOKEN: ${TOKEN}
+      OW_TOKEN: ${OW_TOKEN}

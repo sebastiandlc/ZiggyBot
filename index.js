@@ -2,9 +2,12 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const fs = require('fs');
+//const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { TOKEN } = require('./constants.js');
+
+const wait = require('util').promisify(setTimeout);
+const fs = require('fs');
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -35,9 +38,6 @@ for (const file of eventFiles) {
 }
 
 
-
-
-
 // Call a command's execute() if it is a valid command
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
@@ -46,11 +46,22 @@ client.on('interactionCreate', async interaction => {
 
     if (!command) return;
 
+    // Execute the command
     try {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true});
+    }
+
+    // If the command has a deferred follow-up message, handle it here
+    // TODO: add counter to tally votes and give follow up message with result
+    if (interaction.commandName === 'vote') {
+        console.log(`time to wait: ${command.getTime()}m.`);
+        //await wait(60000 * ${command.getTime()});
+
+
+        await interaction.followUp('Voting is over!');
     }
 });
 

@@ -6,7 +6,6 @@ dotenv.config();
 const { Client, Collection, Intents } = require('discord.js');
 const { TOKEN } = require('./constants.js');
 
-const wait = require('util').promisify(setTimeout);
 const fs = require('fs');
 
 // Create a new client instance
@@ -54,15 +53,8 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true});
     }
 
-    // If the command has a deferred follow-up message, handle it here
-    // TODO: add counter to tally votes and give follow up message with result
-    if (interaction.commandName === 'vote') {
-        console.log(`time to wait: ${command.getTime()}m.`);
-        //await wait(60000 * ${command.getTime()});
+    // If a command has a deferred follow-up message, handle it here
 
-
-        await interaction.followUp('Voting is over!');
-    }
 });
 
 // Login to Discord using client token

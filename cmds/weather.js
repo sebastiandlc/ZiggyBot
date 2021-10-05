@@ -55,11 +55,12 @@ module.exports = {
                             interaction.editReply('There was an error');
                       });
 
-                // set values from fetch here 
+                // set values from fetch here
 
 
                 // Build the MessageEmbed
                 const weatherEmbed = new MessageEmbed()
+                    .setColor('#a37c82')
                     .setTitle(name)
                     //.setDescription() // add short message depending on the temperature
                     .setThumbnail(`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`)
@@ -69,8 +70,10 @@ module.exports = {
                         { name: '**Weather Condition**', value: `:mega: ${weather[0].description}`, inline: true },
                         { name: '**Feels Like**', value: `:thermometer: ${parseInt(main.feels_like)}°F`, inline: true },
                         //{ name: '**Sunset**', value: `:sunrise:`, inline: true },
-                        { name: '**Wind**', value: `:dash: ${parseInt(wind.gust)} mph`, inline: true }, // add wind direction
-                    );
+                        { name: '**Wind**', value: `:dash: ${parseInt(wind.gust)} mph`, inline: true })
+                        // add wind direction
+                    .setTimestamp();
+
 
                 // Send the finished embed to client
                 interaction.editReply({ embeds: [weatherEmbed] });

@@ -29,7 +29,7 @@ module.exports = {
             // Build the MessageEmbed
             const pollEmbed = new MessageEmbed()
                 .setColor('#a2d4df')
-                .setAuthor(`${interaction.user.username} has started a poll!`)
+                .setAuthor(`${interaction.user.username} has started a poll!`, 'https://i.imgur.com/5v1tiLI.png')
                 .setTitle(`${interaction.options.getString('question')}`)
                 .setThumbnail('https://i.imgur.com/5v1tiLI.png')
                 .setDescription(`${optionsListString}`)
@@ -37,12 +37,12 @@ module.exports = {
 
             const message = await interaction.reply({ embeds: [pollEmbed], fetchReply: true });
 
-            // Add the initial reactions to the poll message
-            for (let i = 0; i < numOptions; i++) {
+            // Add the initial reactions to the poll message in order
+            for (let i = 0; i < numOptions; i++)
                 await message.react(`${optionEmojis[i]}`);
-            }
+
         } catch (error) {
             console.error(error);
         }
-    }
-}
+    },
+};

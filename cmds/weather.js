@@ -6,7 +6,6 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { OW_TOKEN } = require('../constants.js');
 const { MessageEmbed } = require('discord.js');
 
-// left to do: ability to search by city name, 7-day forecast, add footer for embed
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('weather')
@@ -61,6 +60,7 @@ module.exports = {
                 // Build the MessageEmbed
                 const weatherEmbed = new MessageEmbed()
                     .setColor('#a37c82')
+                    .setAuthor('Current weather conditions for', `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`)
                     .setTitle(name)
                     //.setDescription() // add short message depending on the temperature
                     .setThumbnail(`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`)
@@ -70,8 +70,7 @@ module.exports = {
                         { name: '**Weather Condition**', value: `:mega: ${weather[0].description}`, inline: true },
                         { name: '**Feels Like**', value: `:thermometer: ${parseInt(main.feels_like)}°F`, inline: true },
                         //{ name: '**Sunset**', value: `:sunrise:`, inline: true },
-                        { name: '**Wind**', value: `:dash: ${parseInt(wind.gust)} mph`, inline: true })
-                        // add wind direction
+                        { name: '**Wind**', value: `:dash: ${parseInt(wind.gust)} mph`, inline: true }) // add wind direction
                     .setTimestamp();
 
 

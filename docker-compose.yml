@@ -7,3 +7,4 @@ services:
       GUILD_ID: ${GUILD_ID}
       TOKEN: ${TOKEN}
       OW_TOKEN: ${OW_TOKEN}
+      SP_TOKEN: ${SP_TOKEN}

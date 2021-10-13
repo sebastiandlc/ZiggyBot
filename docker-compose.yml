@@ -8,3 +8,5 @@ services:
       TOKEN: ${TOKEN}
       OW_TOKEN: ${OW_TOKEN}
       SP_TOKEN: ${SP_TOKEN}
+      IMGUR_CLIENT_ID: ${IMGUR_CLIENT_ID}
+      IMGUR_ALBUM_HASH: ${IMGUR_ALBUM_HASH}

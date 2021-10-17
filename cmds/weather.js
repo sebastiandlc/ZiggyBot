@@ -146,19 +146,26 @@ module.exports = {
                     hourTimes.push(tempDate.toLocaleString("en-US", {hour: "numeric"}));
                     hourTimes24.push(tempDate.toLocaleString("en-US", {hour: "numeric", hour12: false}));
 
-                    // 800 is for clear sky, 80x is for clouds
-                    if (weatherId === 800) {
-                        if (hourTimes24[i] < sunriseHour) {
+                    // Populate weather emojis (use different icons for sunrise/sunset/clear skies)
+                    if (hourTimes24[i] === sunriseHour) {
+                        weatherIcons.push(":sunrise:");
+
+                        // Replace xx AM with xx:xx AM
+                        hourTimes[i] = tempSRDate.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
+
+                    } else if (hourTimes24[i] === sunsetHour) {
+                        weatherIcons.push(":city_sunset:");
+
+                        // Replace xx AM with xx:xx PM
+                        hourTimes[i] = tempSSDate.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
+
+                    } else if (weatherId === 800) {
+                        if (hourTimes24[i] < sunriseHour)
                             weatherIcons.push(":new_moon:");
-                        } else if (hourTimes24[i] === sunriseHour) {
-                            weatherIcons.push(":sunrise:");
-                        } else if (hourTimes24[i] < sunsetHour) {
+                        else if (hourTimes24[i] < sunsetHour)
                             weatherIcons.push(":sunny:");
-                        } else if (hourTimes24[i] === sunsetHour) {
-                            weatherIconds.push(":city_sunset:");
-                        } else {
+                        else
                             weatherIcons.push(":new_moon:");
-                        }
                     } else
                         weatherIcons.push(emojis[Math.floor(weatherId / 100)]);
 
@@ -178,7 +185,7 @@ module.exports = {
 
                 for (let i = 0; i < 8; i++)
                     hourlyForecastEmbed.addFields(
-                        { name: `${hourTimes[i]}`, value: `${weatherIcons[i]} ${hourlyDescriptions[i]}`, inline: true },
+                        { name: `${hourTimes[i]} ${weatherIcons[i]}`, value: `${hourlyDescriptions[i]}`, inline: true },
                         { name: `\u2800`, value: `:cloud_rain: ${hourlyRainOdds[i]}%`, inline: true },
                         { name: `\u2800`, value: `:thermometer: ${hourlyTemps[i]}°F`, inline: true } );
 
@@ -239,11 +246,6 @@ module.exports = {
                     .setTimestamp();
 
                 interaction.editReply({ embeds: [weatherEmbed] });
-
-            } else {
-                console.log("Invalid weather subcommand given.");
-                interaction.editReply("There was an error!");
-
             }
         } catch (error) {
             console.error(error);

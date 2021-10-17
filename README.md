@@ -22,13 +22,22 @@ To setup your own bot using this project's code you'll first need to create a Di
 **4. Create the environment file**
 * Create a .env file within the project directory and place your client id, guild id, and token values as such:
 ```
-CLIENT_ID=12345678910
-GUILD_ID=1234678910
-TOKEN=asedlknfyicq348975rcvdTSDtsvdjdrtcES
-OW_TOKEN=dfsklf234nasdf2348asdn234
+CLIENT_ID=<your_client_id>
+GUILD_ID=<your_discord_guild_id>
+TOKEN=<your_discord_token>
+OW_TOKEN=<your_openweater_token>
+SP_TOKEN=<your_strawpoll_token>
+IMGUR_CLIENT_ID=<your_imgur_client_id>
+IMGUR_ALBUM_HASH=<your_imgur_album_hash>
 ```
 
-The API key for OpenWeather access is ```OW_TOKEN```, get yours [here](https://openweathermap.org/).
+* ```OW_TOKEN``` is the API key for OpenWeather access, get yours [here](https://openweathermap.org/).
+
+* ```SP_TOKEN``` is the API key for StrawPoll access, get yours [here](https://strawpoll.com/account/settings/api).
+
+* ```IMGUR_CLIENT_ID``` is the ID for the application Imgur grants access to, get yours [here](https://api.imgur.com/oauth2/addclient).
+
+* ```IMGUR_ABLUM_HASH``` is the album hash for the Imgur album you wish to pull pictures from when using the ```/cat``` command.
 
 #### Running Locally
 

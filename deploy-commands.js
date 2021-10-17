@@ -24,12 +24,11 @@ const rest = new REST({ version: '9' }).setToken(TOKEN);
 
 (async () => {
     try {
-		    console.log('Refreshing application (/) commands.');
+        console.log('Refreshing application (/) commands.');
 
         await rest.put(
             Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
-            { body: commands },
-        );
+            { body: commands });
 
         console.log('Successfully reloaded application (/) commands.');
     } catch (error) {

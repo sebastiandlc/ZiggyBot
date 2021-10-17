@@ -39,11 +39,13 @@ for (const file of eventFiles) {
 
 // Call a command's execute() if it is a valid command
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
+    if (!interaction.isCommand())
+        return;
 
     const command = client.commands.get(interaction.commandName);
 
-    if (!command) return;
+    if (!command)
+        return;
 
     // Execute the command
     try {

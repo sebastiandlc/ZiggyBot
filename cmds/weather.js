@@ -154,7 +154,7 @@ module.exports = {
                             weatherIcons.push(":sunrise:");
                         } else if (hourTimes24[i] < sunsetHour) {
                             weatherIcons.push(":sunny:");
-                        } else if (hourTimes[i] === sunsetHour) {
+                        } else if (hourTimes24[i] === sunsetHour) {
                             weatherIconds.push(":city_sunset:");
                         } else {
                             weatherIcons.push(":new_moon:");
